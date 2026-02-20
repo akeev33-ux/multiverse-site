@@ -82,14 +82,14 @@
       <div id="out" class="out" style="display:none"></div>
       <p class="hint" style="margin-top:12px">
         Подключение ИИ делается через “прослойку” (Cloudflare Worker), чтобы не светить ключ в браузере.
-        В коде ниже нужно будет заменить <code>YOUR_WORKER_URL</code>.
+        В коде ниже нужно будет заменить <code>https://multiverse-worker.akeev33.workers.dev/</code>.
       </p>
     </div>
   </div>
 
   <script>
     // 1) ВСТАВЬ сюда URL своего Cloudflare Worker (он будет вида https://something.yourname.workers.dev)
-    const WORKER_URL = "YOUR_WORKER_URL";
+    const WORKER_URL = "https://multiverse-worker.akeev33.workers.dev/";
 
     const $ = (id) => document.getElementById(id);
     const out = $("out");
@@ -134,7 +134,7 @@
 
       if (!hero) return setStatus("Заполни поле «Герой».", "err");
       if (!fork) return setStatus("Заполни поле «Развилка».", "err");
-      if (WORKER_URL === "YOUR_WORKER_URL") return setStatus("Сначала разверни Worker и вставь его URL в код.", "err");
+      if (!WORKER_URL || WORKER_URL.includes("YOUR_WORKER_URL"))return setStatus("Сначала разверни Worker и вставь его URL в код.", "err");
 
       btn.disabled = true;
       setStatus("Генерирую… (10–30 сек)", "");
@@ -162,4 +162,5 @@
     });
   </script>
 </body>
+
 </html>
